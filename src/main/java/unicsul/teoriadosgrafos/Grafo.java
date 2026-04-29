@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Grafo {
 
-    private final Map<String, List<String>> adjacencia = new LinkedHashMap<>();
+    public final Map<String, List<String>> adjacencia = new LinkedHashMap<>();
 
     public void adicionarVertice(String vertice) {
         adjacencia.putIfAbsent(vertice, new ArrayList<>());
