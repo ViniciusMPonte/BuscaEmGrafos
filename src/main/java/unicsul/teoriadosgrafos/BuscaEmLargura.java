@@ -27,12 +27,16 @@ public class BuscaEmLargura {
             }
 
             List<String> vizinhos = g.adjacencia.get(verticeAtual);
-            if (!vizinhos.isEmpty()) fila.enfileirarLista(vizinhos);
+            
+            if (vizinhos != null && !vizinhos.isEmpty()) {
+        
+            }
+        }
 
             processados.add(verticeAtual);
             verticeAtual = null;
         }
 
-        System.out.println("Não achado");
     }
-}
+
+
