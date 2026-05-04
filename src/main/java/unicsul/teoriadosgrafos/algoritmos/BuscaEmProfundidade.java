@@ -39,4 +39,20 @@ public class BuscaEmProfundidade implements Busca {
 
         return "Não achado";
     }
+
+    @Override
+    public void medirTempoEImprimir(Grafo grafo, String inicio, String fim) {
+
+        long totalTempo = 0;
+        int rodadas = 10;
+        String retorno = "";
+
+        for (int i = 0; i < rodadas; i++) {
+            long start = System.nanoTime();
+            retorno = buscar(grafo, inicio, fim);
+            totalTempo += System.nanoTime() - start;
+        }
+
+        System.out.print("[DFS] " + retorno + "\nMédia: " + (totalTempo / rodadas) / 1000.0 + " µs\n\n");
+    }
 }

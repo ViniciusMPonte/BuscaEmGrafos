@@ -1,31 +1,29 @@
 package unicsul.teoriadosgrafos;
 
+import unicsul.teoriadosgrafos.algoritmos.Busca;
 import unicsul.teoriadosgrafos.algoritmos.BuscaEmLargura;
 import unicsul.teoriadosgrafos.algoritmos.BuscaEmProfundidade;
-import unicsul.teoriadosgrafos.algoritmos.Busca;
 
 public class Main {
     public static void main(String[] args) {
-
         Grafo grafo = Grafo.construir();
+        Busca[] algoritmos = {
+                new BuscaEmLargura(),
+                new BuscaEmProfundidade()
+        };
+
+        System.out.println("\n\n==== Estrutura do Grafo ====\n");
         grafo.imprimirAdjacencia();
 
-        medirTempo(grafo, "A-0", "G-8", "BFS", new BuscaEmLargura());
-        medirTempo(grafo, "A-0", "G-8", "DFS", new BuscaEmProfundidade());
+        buscarEImprimir(grafo, algoritmos, "A-0", "G-8");
+        buscarEImprimir(grafo, algoritmos, "C-1", "L-4");
+        buscarEImprimir(grafo, algoritmos, "B-2", "H-9");
     }
 
-    public static void medirTempo(Grafo grafo, String inicio, String fim, String label, Busca buscador) {
-
-        long totalTempo = 0;
-        int rodadas = 10;
-        String retorno = "";
-
-        for (int i = 0; i < rodadas; i++) {
-            long start = System.nanoTime();
-            retorno = buscador.buscar(grafo, inicio, fim);
-            totalTempo += System.nanoTime() - start;
+    private static void buscarEImprimir(Grafo grafo, Busca[] algoritmos, String inicio, String fim) {
+        System.out.println("\n\n==== Busca do vertice " + inicio + " até " + fim + " ====\n");
+        for (Busca algoritmo : algoritmos) {
+            algoritmo.medirTempoEImprimir(grafo, inicio, fim);
         }
-
-        System.out.println("\n[" + label + "] " + retorno + "\nMédia: " + (totalTempo / rodadas) / 1000.0 + " µs");
     }
 }
