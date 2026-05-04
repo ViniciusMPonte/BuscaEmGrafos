@@ -13,15 +13,16 @@ public class BuscaEmLargura implements Busca {
 
     EstruturaDados fila;
     String verticeAtual;
-    List<String> processados = new ArrayList<>();
-    Set<String> visitados = new HashSet<>();
-
-    public BuscaEmLargura() {
-        fila = new Fila();
-    }
+    List<String> processados;
+    Set<String> visitados;
 
     @Override
     public String buscar(Grafo g, String verticeInicial, String verticeFinal) {
+
+        fila = new Fila();
+        verticeAtual = null;
+        processados = new ArrayList<>();
+        visitados = new HashSet<>();
 
         fila.inserir(verticeInicial);
 

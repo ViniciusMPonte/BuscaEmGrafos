@@ -2,6 +2,7 @@ package unicsul.teoriadosgrafos;
 
 import unicsul.teoriadosgrafos.algoritmos.BuscaEmLargura;
 import unicsul.teoriadosgrafos.algoritmos.BuscaEmProfundidade;
+import unicsul.teoriadosgrafos.algoritmos.Busca;
 
 public class Main {
     public static void main(String[] args) {
@@ -9,42 +10,22 @@ public class Main {
         Grafo grafo = Grafo.construir();
         grafo.imprimirAdjacencia();
 
-        medirTempoBFS(grafo, "A-0", "G-8");
-
-        medirTempoDFS(grafo, "A-0", "G-8");
+        medirTempo(grafo, "A-0", "G-8", "BFS", new BuscaEmLargura());
+        medirTempo(grafo, "A-0", "G-8", "DFS", new BuscaEmProfundidade());
     }
 
-    public static void medirTempoBFS(Grafo grafo, String inicio, String fim) {
+    public static void medirTempo(Grafo grafo, String inicio, String fim, String label, Busca buscador) {
 
         long totalTempo = 0;
         int rodadas = 10;
         String retorno = "";
 
         for (int i = 0; i < rodadas; i++) {
-            BuscaEmLargura bfs = new BuscaEmLargura();
-
             long start = System.nanoTime();
-            retorno = bfs.buscar(grafo, inicio, fim);
+            retorno = buscador.buscar(grafo, inicio, fim);
             totalTempo += System.nanoTime() - start;
         }
 
-        System.out.println("\n[BFS] " + retorno + "\nMédia: " + (totalTempo / rodadas) / 1000.0 + " µs");
-    }
-
-    public static void medirTempoDFS(Grafo grafo, String inicio, String fim) {
-
-        long totalTempo = 0;
-        int rodadas = 10;
-        String retorno = "";
-
-        for (int i = 0; i < rodadas; i++) {
-            BuscaEmProfundidade dfs = new BuscaEmProfundidade();
-
-            long start = System.nanoTime();
-            retorno = dfs.buscar(grafo, inicio, fim);
-            totalTempo += System.nanoTime() - start;
-        }
-
-        System.out.println("\n[DFS] " + retorno + "\nMédia: " + (totalTempo / rodadas) / 1000.0 + " µs");
+        System.out.println("\n[" + label + "] " + retorno + "\nMédia: " + (totalTempo / rodadas) / 1000.0 + " µs");
     }
 }

@@ -13,15 +13,16 @@ public class BuscaEmProfundidade implements Busca {
 
     EstruturaDados pilha;
     String verticeAtual;
-    List<String> processados = new ArrayList<>();
-    Set<String> visitados = new HashSet<>();
-
-    public BuscaEmProfundidade() {
-        pilha = new Pilha();
-    }
+    List<String> processados;
+    Set<String> visitados;
 
     @Override
     public String buscar(Grafo g, String verticeInicial, String verticeFinal) {
+
+        pilha = new Pilha();
+        verticeAtual = null;
+        processados = new ArrayList<>();
+        visitados = new HashSet<>();
 
         pilha.inserir(verticeInicial);
 
