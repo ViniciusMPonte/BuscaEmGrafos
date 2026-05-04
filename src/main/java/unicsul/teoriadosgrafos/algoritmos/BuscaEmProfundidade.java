@@ -1,5 +1,6 @@
-package unicsul.teoriadosgrafos;
+package unicsul.teoriadosgrafos.algoritmos;
 
+import unicsul.teoriadosgrafos.Grafo;
 import unicsul.teoriadosgrafos.colecoes.EstruturaDados;
 import unicsul.teoriadosgrafos.colecoes.Pilha;
 

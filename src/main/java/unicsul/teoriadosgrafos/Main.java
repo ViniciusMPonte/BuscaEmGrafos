@@ -1,14 +1,17 @@
 package unicsul.teoriadosgrafos;
 
+import unicsul.teoriadosgrafos.algoritmos.BuscaEmLargura;
+import unicsul.teoriadosgrafos.algoritmos.BuscaEmProfundidade;
+
 public class Main {
     public static void main(String[] args) {
 
         Grafo grafo = Grafo.construir();
         grafo.imprimirAdjacencia();
 
-        medirTempoBFS(grafo, "A", "G");
+        medirTempoBFS(grafo, "A-0", "G-8");
 
-        medirTempoDFS(grafo, "A", "G");
+        medirTempoDFS(grafo, "A-0", "G-8");
     }
 
     public static void medirTempoBFS(Grafo grafo, String inicio, String fim) {
