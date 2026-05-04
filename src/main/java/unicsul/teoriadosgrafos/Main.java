@@ -16,11 +16,11 @@ public class Main {
                 new BuscaEmProfundidade()
         };
 
-        System.out.println("\n\n==== Estrutura do Grafo ====\n");
-        grafo.imprimirAdjacencia();
-
         Map<Busca, BigDecimal> totais = new HashMap<>();
         for (Busca algoritmo : algoritmos) totais.put(algoritmo, BigDecimal.ZERO);
+
+        System.out.println("\n\n==== Estrutura do Grafo ====\n");
+        grafo.imprimirAdjacencia();
 
         buscarEImprimir(grafo, algoritmos, totais, "A-0", "G-8");
         buscarEImprimir(grafo, algoritmos, totais, "C-1", "L-4");
