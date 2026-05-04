@@ -11,23 +11,17 @@ import java.util.Set;
 
 public class BuscaEmProfundidade implements Busca {
 
-    EstruturaDados pilha;
-    String verticeAtual;
-    List<String> processados;
-    Set<String> visitados;
-
     @Override
     public String buscar(Grafo g, String verticeInicial, String verticeFinal) {
 
-        pilha = new Pilha();
-        verticeAtual = null;
-        processados = new ArrayList<>();
-        visitados = new HashSet<>();
+        EstruturaDados pilha = new Pilha();
+        List<String> processados = new ArrayList<>();
+        Set<String> visitados = new HashSet<>();
 
         pilha.inserir(verticeInicial);
 
         while (!pilha.estaVazia()) {
-            verticeAtual = pilha.remover();
+            String verticeAtual = pilha.remover();
 
             if (!visitados.add(verticeAtual)) continue;
 
@@ -41,7 +35,6 @@ public class BuscaEmProfundidade implements Busca {
                     .forEach(pilha::inserir);
 
             processados.add(verticeAtual);
-            verticeAtual = null;
         }
 
         return "Não achado";

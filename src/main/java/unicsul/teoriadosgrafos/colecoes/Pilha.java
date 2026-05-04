@@ -36,20 +36,4 @@ public class Pilha implements EstruturaDados {
     public int tamanho() {
         return pilha.size();
     }
-
-    public void empilhar(String item) {
-        inserir(item);
-    }
-
-    public void empilharLista(List<String> itens) {
-        inserirLista(itens);
-    }
-
-    public String desempilhar() {
-        return remover();
-    }
-
-    public String topo() {
-        return espiar();
-    }
 }

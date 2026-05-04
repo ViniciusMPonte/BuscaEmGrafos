@@ -11,23 +11,17 @@ import java.util.Set;
 
 public class BuscaEmLargura implements Busca {
 
-    EstruturaDados fila;
-    String verticeAtual;
-    List<String> processados;
-    Set<String> visitados;
-
     @Override
     public String buscar(Grafo g, String verticeInicial, String verticeFinal) {
 
-        fila = new Fila();
-        verticeAtual = null;
-        processados = new ArrayList<>();
-        visitados = new HashSet<>();
+        EstruturaDados fila = new Fila();
+        List<String> processados = new ArrayList<>();
+        Set<String> visitados = new HashSet<>();
 
         fila.inserir(verticeInicial);
 
         while (!fila.estaVazia()) {
-            verticeAtual = fila.remover();
+            String verticeAtual = fila.remover();
 
             if (!visitados.add(verticeAtual)) continue;
 
@@ -41,7 +35,6 @@ public class BuscaEmLargura implements Busca {
                     .forEach(fila::inserir);
 
             processados.add(verticeAtual);
-            verticeAtual = null;
         }
 
         return "Não achado";
