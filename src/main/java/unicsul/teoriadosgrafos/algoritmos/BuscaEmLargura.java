@@ -1,24 +1,33 @@
 package unicsul.teoriadosgrafos;
 
+import unicsul.teoriadosgrafos.colecoes.EstruturaDados;
+import unicsul.teoriadosgrafos.colecoes.Fila;
+
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public class BuscaEmLargura {
+public class BuscaEmLargura implements Busca {
 
-    Fila fila;
+    EstruturaDados fila;
     String verticeAtual;
     List<String> processados = new ArrayList<>();
+    Set<String> visitados = new HashSet<>();
 
     public BuscaEmLargura() {
         fila = new Fila();
     }
 
+    @Override
     public void buscar(Grafo g, String verticeInicial, String verticeFinal) {
 
-        fila.enfileirar(verticeInicial);
+        fila.inserir(verticeInicial);
 
         while (!fila.estaVazia()) {
-            verticeAtual = fila.desenfileirar();
+            verticeAtual = fila.remover();
+
+            if (!visitados.add(verticeAtual)) continue;
 
             if (verticeAtual.equals(verticeFinal)) {
                 System.out.println("Caminho encontrado: ");
@@ -26,17 +35,15 @@ public class BuscaEmLargura {
                 return;
             }
 
-            List<String> vizinhos = g.adjacencia.get(verticeAtual);
-            
-            if (vizinhos != null && !vizinhos.isEmpty()) {
-        
-            }
-        }
+            g.adjacencia.getOrDefault(verticeAtual, List.of())
+                    .stream()
+                    .filter(v -> !visitados.contains(v))
+                    .forEach(fila::inserir);
 
             processados.add(verticeAtual);
             verticeAtual = null;
         }
 
+        System.out.println("Não achado");
     }
-
-
+}
