@@ -4,6 +4,7 @@ import unicsul.teoriadosgrafos.Grafo;
 import unicsul.teoriadosgrafos.colecoes.EstruturaDados;
 import unicsul.teoriadosgrafos.colecoes.Fila;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -41,7 +42,7 @@ public class BuscaEmLargura implements Busca {
     }
 
     @Override
-    public void medirTempoEImprimir(Grafo grafo, String inicio, String fim) {
+    public BigDecimal medirTempoEImprimir(Grafo grafo, String inicio, String fim) {
 
         long totalTempo = 0;
         int rodadas = 10;
@@ -53,6 +54,8 @@ public class BuscaEmLargura implements Busca {
             totalTempo += System.nanoTime() - start;
         }
 
-        System.out.print("[BFS] " + retorno + "\nMédia: " + (totalTempo / rodadas) / 1000.0 + " µs\n\n");
+        BigDecimal media = BigDecimal.valueOf(totalTempo / rodadas).divide(BigDecimal.valueOf(1000));
+        System.out.print("[BFS] " + retorno + "\nMédia: " + media + " µs\n\n");
+        return media;
     }
 }
