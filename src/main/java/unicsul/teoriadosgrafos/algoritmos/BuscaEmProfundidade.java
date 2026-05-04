@@ -21,7 +21,7 @@ public class BuscaEmProfundidade implements Busca {
     }
 
     @Override
-    public void buscar(Grafo g, String verticeInicial, String verticeFinal) {
+    public String buscar(Grafo g, String verticeInicial, String verticeFinal) {
 
         pilha.inserir(verticeInicial);
 
@@ -31,9 +31,7 @@ public class BuscaEmProfundidade implements Busca {
             if (!visitados.add(verticeAtual)) continue;
 
             if (verticeAtual.equals(verticeFinal)) {
-                System.out.println("Caminho encontrado: ");
-                System.out.println(String.join(" -> ", processados) + " -> " + verticeAtual);
-                return;
+                return "Caminho encontrado: " + String.join(" -> ", processados) + " -> " + verticeAtual;
             }
 
             g.adjacencia.getOrDefault(verticeAtual, List.of())
@@ -45,6 +43,6 @@ public class BuscaEmProfundidade implements Busca {
             verticeAtual = null;
         }
 
-        System.out.println("Não achado");
+        return "Não achado";
     }
 }
